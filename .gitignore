@@ -1,0 +1,7 @@
+.settings/
+*.swp
+.classpath
+.project
+bin
+gen
+project.properties
