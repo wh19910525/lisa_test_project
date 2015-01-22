@@ -6,3 +6,6 @@ bin
 gen
 project.properties
 *~
+.svn/
+.DS_Store
+
