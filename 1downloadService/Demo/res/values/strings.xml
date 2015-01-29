@@ -1,5 +1,10 @@
 <resources>
 
     <string name="app_name">Demo</string>
+    <string name="launch_service">launch service</string>
+    <string name="check_root">check root</string>
+    <string name="insert_data">insert data</string>
+    <string name="query_data">query data</string>
+    <string name="delete_data">delete data</string>
 
 </resources>

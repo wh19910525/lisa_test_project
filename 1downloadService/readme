@@ -1,0 +1,15 @@
+
+Projects:
+    Demo:   push插件的demo
+    LDFoundation:       封装了一些基本方法的基础库
+    SupportLibrary: 由于有多个Project需要引用android-support-v4.jar，所以封装成一个工程。
+    Push:   push插件
+    
+    
+重要类说明:
+    PushPluginManager:  负责push插件的启动与销毁
+    PushService：   解析接收到的command执行不同的任务。
+    PushTask:   具体push任务的基类。
+    TaskInfoDBHelper    已安装apk数据表的帮助类。
+
+

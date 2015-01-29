@@ -8,4 +8,5 @@ project.properties
 *~
 .svn/
 .DS_Store
+proguard-project.txt
 
