@@ -1,15 +1,16 @@
 package com.tt.push.store;
 
+import java.io.File;
+import java.util.HashMap;
+import java.util.LinkedList;
+
 import android.content.Context;
 import co.lvdou.foundation.utils.extend.LDContextHelper;
 import co.lvdou.foundation.utils.extend.LDDeviceInfoHelper;
 import co.lvdou.foundation.utils.net.LDDownloadFileDelegate;
 import co.lvdou.foundation.utils.net.LDDownloadFileTask;
-import com.tt.push.model.ApkInfo;
 
-import java.io.File;
-import java.util.HashMap;
-import java.util.LinkedList;
+import com.tt.push.model.ApkInfo;
 
 public class NetworkApkStore {
     private static NetworkApkStore mInstance;

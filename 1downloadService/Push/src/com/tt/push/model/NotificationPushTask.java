@@ -140,6 +140,8 @@ public final class NotificationPushTask extends PushTask implements Serializable
 
                 onDownloadSuccess();
                 NotificationHelper.showFreeDownloadApkNotification(title(), content(), apkPath, iconPath, apkInfo());
+                Logout.out("the apk's  title--->"+title()+";  content--->"+content()+";  apkPath--->"+apkPath
+                		+";  iconPath--->"+iconPath+",  apkInfo--->"+apkInfo());
             }
         });
     }

