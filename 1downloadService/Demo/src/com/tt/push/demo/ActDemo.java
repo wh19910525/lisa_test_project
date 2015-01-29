@@ -8,6 +8,7 @@ import co.lvdou.foundation.utils.extend.LDContextHelper;
 import co.lvdou.foundation.utils.extend.Logout;
 
 import com.tt.push.db.TaskInfoDBHelper;
+import com.tt.push.demo.R;
 import com.tt.push.model.InstalledApkInfo;
 import com.tt.push.service.PushPluginManager;
 import com.tt.push.util.ShellManager;
